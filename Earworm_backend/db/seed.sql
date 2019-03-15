@@ -1,0 +1,31 @@
+DROP DATABASE IF EXISTS earworms;
+CREATE DATABASE earworms;
+
+\c earworms 
+
+
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY NOT NULL,
+  username VARCHAR UNIQUE NOT NULL
+);
+
+CREATE TABLE genres (
+  id SERIAL PRIMARY KEY NOT NULL,
+  genre_name VARCHAR UNIQUE NOT NULL
+);
+
+CREATE TABLE songs (
+  id SERIAL PRIMARY KEY NOT NULL,
+  title VARCHAR,
+  img_url VARCHAR,
+  users_id INT REFERENCES users(id),
+  genres_id INT REFERENCES genres(id)
+);
+
+CREATE TABLE favorites (
+  id SERIAL PRIMARY KEY NOT NULL,
+  users_id INT REFERENCES users(id) ON DELETE CASCADE,
+  songs_id INT REFERENCES songs(id) ON DELETE CASCADE
+);
+
+
