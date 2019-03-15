@@ -36,11 +36,7 @@ CREATE TABLE comments (
 );
 
 \COPY users(username) FROM '../db/users.csv' DELIMITER ',' CSV HEADER;
-
 INSERT INTO genres(type) VALUES ('children song'),('pop'),('rock'),('folk'),('theme');
-
-\COPY songs (title,img_url,users_id,genres_id) FROM '../songs.csv' DELIMITER ',' CSV HEADER;
-
-\COPY favorites (users_id,songs_id) FROM '../favorites.csv' DELIMITER ',' CSV HEADER;
-
-\COPY comments (body, users_id, songs_id) FROM '../comments.csv' DELIMITER ',' CSV HEADER;
+\COPY songs (title,img_url,users_id,genres_id) FROM './songs.csv' DELIMITER ',' CSV HEADER;
+\COPY favorites (users_id,songs_id) FROM './favorites.csv' DELIMITER ',' CSV HEADER;
+\COPY comments (body, users_id, songs_id) FROM './comments.csv' DELIMITER ',' CSV HEADER;
