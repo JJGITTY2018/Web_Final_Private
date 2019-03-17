@@ -9,7 +9,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const genresRouter = require ('./routes/genre')
-const songsRouter = require('./queries/songs_q')
+const songsRouter = require('./routes/songs')
 var app = express();
 
 // view engine setup

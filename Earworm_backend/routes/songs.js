@@ -8,11 +8,25 @@ const {
   getAllSongByUser,
   getAllSongsByGenre,
   getAllSongs
-} = require("../queries/song_q.js")
+} = require("../queries/songs_q")
 
 /* GET users listing. */
 router.get("/", getAllSongs)
-router.get("/:genre", getAllSongs)
+router.get("/:id", getOneSong)
+router.get("/genres/:id", getAllSongsByGenre)
+router.get("/users/:id", getAllSongByUser)
+
+router.post("/", createNewSong)
+router.delete("/", deleteSong)
+
+
+
+
+
+
+
+
+
 
 
 module.exports = router;
