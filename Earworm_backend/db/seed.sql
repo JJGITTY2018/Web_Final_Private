@@ -18,8 +18,8 @@ CREATE TABLE songs (
   id SERIAL PRIMARY KEY NOT NULL,
   title VARCHAR,
   img_url VARCHAR,
-  users_id INT REFERENCES users(id),
-  genres_id INT REFERENCES genres(id)
+  users_id INT REFERENCES users(id) ON DELETE SET NULL,
+  genres_id INT REFERENCES genres(id) ON DELETE SET NULL
 );
 
 CREATE TABLE favorites (
@@ -31,8 +31,8 @@ CREATE TABLE favorites (
 CREATE TABLE comments (
   id SERIAL PRIMARY KEY NOT NULL,
   body VARCHAR,
-  users_id INT REFERENCES users(id),
-  songs_id INT REFERENCES songs(id)
+  users_id INT REFERENCES users(id) ON DELETE SET NULL,
+  songs_id INT REFERENCES songs(id) ON DELETE SET NULL
 );
 
 \COPY users(username) FROM '../db/users.csv' DELIMITER ',' CSV HEADER;

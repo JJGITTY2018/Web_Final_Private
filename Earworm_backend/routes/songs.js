@@ -17,7 +17,7 @@ router.get("/genres/:id", getAllSongsByGenre)
 router.get("/users/:id", getAllSongByUser)
 
 router.post("/", createNewSong)
-router.delete("/", deleteSong)
+router.delete("/:id", deleteSong)
 
 
 

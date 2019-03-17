@@ -75,7 +75,7 @@ const createNewSong = (req, res, next) => {
 
 const deleteSong = (req, res, next) => {
   console.log(req.body.username)
-  db.none('DELETE FROM users WHERE id = ($1)', [req.params.id]).then(() => {
+  db.none('DELETE FROM songs WHERE id = ($1)', [req.params.id]).then(() => {
     res.status(200).json({
       message: "deleted",
       userid: req.params.id
