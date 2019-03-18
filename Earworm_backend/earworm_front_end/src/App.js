@@ -23,7 +23,7 @@ class App extends Component {
       <>
       <NavBar exact props={this.props} />
       <Switch >
-          <Route path="/songs" component={Songs}></Route>
+          <Route exact path="/songs" component={Songs}></Route>
           <Route path="/*" render = {Home}> </Route>
       </Switch>
       </>
