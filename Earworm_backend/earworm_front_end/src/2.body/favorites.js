@@ -10,7 +10,7 @@ class Favorites extends Component {
   render() {
     return (
       <form>
-        
+
       </form>
     )
   }

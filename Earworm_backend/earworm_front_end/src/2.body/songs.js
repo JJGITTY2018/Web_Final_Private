@@ -12,7 +12,8 @@ export default class Songs extends Component {
     this.state = {
       data: [],
       searchQuery: "",
-      currentUserID: "1"
+      currentUserID: "1",
+      currentUserFavs: []
     }
   }
 
@@ -39,18 +40,46 @@ export default class Songs extends Component {
       })
   }
 
+  getUserFavorites = ()=>{
+    axios.get('/favorites/users/'+this.state.currentUserID).then((res)=>{
+      console.log(res.data.data)
+      let currentUserFavsArr = []
+      res.data.data.map(el=>{
+        currentUserFavsArr.push(el.songs_id)
+      })
+          this.setState({
+            currentUserFavs: currentUserFavsArr
+          })
+    }).then(()=>{
+      // console.log(this.state)
+    })
+  }
+
+  checkFavsArrOnSong = (element_id) =>{
+    if(this.state.currentUserFavs.includes(element_id)){
+      return (
+        <button> ⭐ Unfavorite This! 💘 </button>
+      )
+    }
+    else {
+      return (<button> ❤ Favorite This! ❤</button>)
+    }
+  }
+
   elMapData = (data) => {
     if (data !== null) {
         return (
           data.map(el =>{
            return(
-             <div className = "Songs" key= {el.title}>
+             <div className = "Songs" key= {el.id}>
                <img src = {el.img_url} width = "auto" height = "100" /> 
                <h1> {el.title} </h1>
                Post by : <NavLink to = {"profile/"+el.id} >{el.added_by}</NavLink>
                <h3> Total Favs: {el.sumoffavs}</h3>
                <h4> Type: {el.type}</h4>
-               <FavsComponent />
+               <div className = "FavButton"> 
+               {this.checkFavsArrOnSong(el.id)}
+               </div>
              </div>
            )
         }))
@@ -75,6 +104,7 @@ export default class Songs extends Component {
 
   componentDidMount() {
       this.getAllSongs()
+      this.getUserFavorites()
   }
 
 
