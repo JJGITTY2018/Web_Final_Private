@@ -78,7 +78,7 @@ const deleteSong = (req, res, next) => {
   db.none('DELETE FROM songs WHERE id = ($1)', [req.params.id]).then(() => {
     res.status(200).json({
       message: "deleted",
-      userid: req.params.id
+      songs_id: req.params.id
     })
   })
     .catch((err) => {
