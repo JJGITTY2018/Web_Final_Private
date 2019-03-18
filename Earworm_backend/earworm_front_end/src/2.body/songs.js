@@ -3,6 +3,7 @@ import axios from "axios"
 import Navi from "../1.header/navi";
 import { NavLink } from "react-router-dom"
 
+import FavsComponent from "./favorites.js"
 
 
 export default class Songs extends Component {
@@ -10,7 +11,8 @@ export default class Songs extends Component {
     super(props)
     this.state = {
       data: [],
-      searchQuery: ""
+      searchQuery: "",
+      currentUserID: "1"
     }
   }
 
@@ -48,6 +50,7 @@ export default class Songs extends Component {
                Post by : <NavLink to = {"profile/"+el.id} >{el.added_by}</NavLink>
                <h3> Total Favs: {el.sumoffavs}</h3>
                <h4> Type: {el.type}</h4>
+               <FavsComponent />
              </div>
            )
         }))
