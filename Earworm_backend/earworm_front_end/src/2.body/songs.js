@@ -4,6 +4,7 @@ import Navi from "../1.header/navi";
 import { NavLink } from "react-router-dom"
 
 import FavsComponent from "./favorites.js"
+import CommtsComponent from "./comments"
 
 
 export default class Songs extends Component {
@@ -79,6 +80,10 @@ export default class Songs extends Component {
                <h4> Type: {el.type}</h4>
                <div className = "FavButton"> 
                {this.checkFavsArrOnSong(el.id)}
+               <h1> Comments: </h1>
+               <div className = "comments">
+                   <CommtsComponent props={el.id}/>
+               </div>
                </div>
              </div>
            )
