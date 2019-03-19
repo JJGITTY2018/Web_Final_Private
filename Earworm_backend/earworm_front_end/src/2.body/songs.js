@@ -86,7 +86,7 @@ export default class Songs extends Component {
         data:data
       }
     })
-  console.log(this.state)
+  // console.log(this.state)
 }
 
   handleFavsMinus = (arr_id) => {

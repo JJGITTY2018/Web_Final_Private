@@ -6,7 +6,8 @@ class Comments extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data:[]
+      data:[],
+      inputValue: "",
     }
   }
 
@@ -18,7 +19,7 @@ class Comments extends Component {
         data: res.data.data
       })
     })
-    }, 1200)
+    }, 80)
   }
 
   elMap = (arr) =>{
@@ -32,18 +33,43 @@ class Comments extends Component {
     })
   }
 
+  onSubmitHandler = (event,users_id, songs_id,text) =>{
+    event.preventDefault()
+    // console.log(this.state)
+    // console.log(this.props)
+    Axios.post("/comments",{
+      body: this.state.inputValue,
+      songs_id: this.props.songs_id,
+      users_id: this.props.currentUserID
+    }).then(() => {
+      this.getCommentsofSongs(this.props.songs_id)
+      this.setState(
+        {
+          inputValue : ""
+        }
+      )
+    })
+  }
+
+  onChangeHandler = (event) => {
+    this.setState({
+    [event.target.name] : event.target.value
+    })
+    // console.log(this.state)
+  }
+
   componentDidMount() {
     this.getCommentsofSongs(this.props.songs_id)
   }
-
+  
   render() {
     return (
       <div className = "SongsComments" > 
       {this.elMap(this.state.data)}
-      <form> 
-      <textarea> 
+      <form onSubmit = {this.onSubmitHandler}>  
+          <textarea name= "inputValue" onChange = {this.onChangeHandler} value = {this.state.inputValue}> 
       </textarea>
-      <input type = "submit" />
+          <input onSubmit={this.onSubmitHandler} type = "submit" />
       </form>
       </div>
       );
