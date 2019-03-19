@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios"
 import Navi from "../1.header/navi";
-import { NavLink } from "react-router-dom"
 
-import FavsComponent from "./favorites.js"
-import CommtsComponent from "./comments"
-
+// import FavsComponent from "./favorites.js"
+import SongList from "./songsList"
 
 export default class Songs extends Component {
   constructor (props) {
@@ -14,7 +12,9 @@ export default class Songs extends Component {
       data: [],
       searchQuery: "",
       currentUserID: "1",
-      currentUserFavs: []
+      currentUserFavs: [],
+      currentUserFavsID: []
+
     }
   }
 
@@ -41,31 +41,7 @@ export default class Songs extends Component {
       })
   }
 
-  getUserFavorites = ()=>{
-    axios.get('/favorites/users/'+this.state.currentUserID).then((res)=>{
-      console.log(res.data.data)
-      let currentUserFavsArr = []
-      res.data.data.map(el=>{
-        currentUserFavsArr.push(el.songs_id)
-      })
-          this.setState({
-            currentUserFavs: currentUserFavsArr
-          })
-    }).then(()=>{
-      // console.log(this.state)
-    })
-  }
-
-  checkFavsArrOnSong = (element_id) =>{
-    if(this.state.currentUserFavs.includes(element_id)){
-      return (
-        <button> ⭐ Unfavorite This! 💘 </button>
-      )
-    }
-    else {
-      return (<button> ❤ Favorite This! ❤</button>)
-    }
-  }
+  
 
   
   handleOnSubmit = (event) =>{
@@ -81,12 +57,9 @@ export default class Songs extends Component {
 
   componentDidMount() {
       this.getAllSongs()
-      this.getUserFavorites()
   }
 
-
   render() {
-
     return (
     <>
       <div className="Songs">
@@ -95,8 +68,32 @@ export default class Songs extends Component {
         <input name = "searchQuery" value = {this.state.searchQuery} type = "input" onChange = {this.handleOnChange}></input>
         <input type = "submit" ></input>
       </form>
-      {this.elMapData(this.state.data)}
+      </div>
+      <div className = "SongListings">
+          <SongList props = {this.state}/>
       </div>
     </>)
   }
 }
+
+
+
+// getUserFavorites = () => {
+//   axios.get('/favorites/users/' + this.state.currentUserID).then((res) => {
+//     console.log(res.data.data)
+//     let currentUserFavsArr = []
+//     let currentUserFavsArrIDs = []
+
+//     res.data.data.map(el => {
+//       currentUserFavsArr.push(el.songs_id)
+//       currentUserFavsArrIDs.push(el.id)
+
+//     })
+//     this.setState({
+//       currentUserFavs: currentUserFavsArr,
+//       currentUserFavsID: currentUserFavsArrIDs,
+//     })
+//   }).then(() => {
+//     // console.log(this.state)
+//   })
+// }

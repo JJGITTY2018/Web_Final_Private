@@ -5,9 +5,8 @@ import {NavLink} from "react-router-dom"
 export default class Navi extends Component {
   constructor (props) {
     super(props)
-    
   }
-  
+
   render() {
     return (
       <>
