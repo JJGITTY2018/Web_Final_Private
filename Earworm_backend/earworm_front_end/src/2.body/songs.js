@@ -12,9 +12,6 @@ export default class Songs extends Component {
       data: [],
       searchQuery: "",
       currentUserID: "1",
-      currentUserFavs: [],
-      currentUserFavsID: []
-
     }
   }
 
@@ -25,24 +22,39 @@ export default class Songs extends Component {
         data:res.data.data
       })
     }).then(()=>{
-      console.log(this.state)
+      // console.log(this.state)
     })
   }
 
   filterSongs =(searchQuery) =>{
-    axios
-      .get('/songs?searchQuery='+searchQuery).then((res) => {
-        this.setState({
-          data: res.data.data,
-          searchQuery: ""
-        })
-      }).then(() => {
-        // console.log(this.state)
+  // searchQuery !== "" ? 
+  (axios
+    .get('/songs?searchQuery='+searchQuery).then((res) => {
+      this.setState({
+        data: res.data.data,
+        currentSearchQuery: this.state.searchQuery,
+        searchQuery: ""
       })
+    }).then(() => {
+      console.log(this.state)
+    }))
+
+
+  //  : 
+  //   (axios
+  //     .get('/songs?searchQuery='+ this.state.currentSearchQuery).then((res) => {
+  //       this.setState({
+  //         data: res.data.data,
+  //         currentSearchQuery: this.state.searchQuery,
+  //         searchQuery: ""
+  //       })
+  //     }).then(() => {
+  //       console.log(this.state)
+  //     }))
+      
   }
 
   
-
   
   handleOnSubmit = (event) =>{
     event.preventDefault()
@@ -55,8 +67,52 @@ export default class Songs extends Component {
     })
   }
 
+  handleFavsAdd = (arr_id) =>{
+    // let favNum = this.state.data[0].sumoffavs
+    // let parsedfavNum = parseInt(favNum)
+    this.setState( state =>{
+      const data = state.data.map((el, state_indx) =>{
+        if(state_indx === arr_id ){
+          // console.log(el.sumoffavs)
+          let y = el
+          y.sumoffavs = (parseInt(y.sumoffavs) + 1)
+          return y
+        }
+        else {
+          return el
+        }
+      })
+      return {
+        data:data
+      }
+    })
+  console.log(this.state)
+}
+
+  handleFavsMinus = (arr_id) => {
+    // let favNum = this.state.data[0].sumoffavs
+    // let parsedfavNum = parseInt(favNum)
+    this.setState(state => {
+      const data = state.data.map((el, state_indx) => {
+        if (state_indx === arr_id) {
+          // console.log(el.sumoffavs)
+          let y = el
+          y.sumoffavs = (parseInt(y.sumoffavs) - 1)
+          return y
+        }
+        else {
+          return el
+        }
+      })
+      return {
+        data: data
+      }
+    })
+    // console.log(this.state)
+  }
+
   componentDidMount() {
-      this.getAllSongs()
+    this.getAllSongs()
   }
 
   render() {
@@ -70,11 +126,13 @@ export default class Songs extends Component {
       </form>
       </div>
       <div className = "SongListings">
-          <SongList props = {this.state}/>
+          <SongList props={this.state} AddFavs={this.handleFavsAdd} MinusFavs={this.handleFavsMinus}/> 
       </div>
     </>)
   }
 }
+
+
 
 
 

@@ -18,7 +18,7 @@ class Comments extends Component {
         data: res.data.data
       })
     })
-    }, 2000)
+    }, 1200)
   }
 
   elMap = (arr) =>{
@@ -40,6 +40,11 @@ class Comments extends Component {
     return (
       <div className = "SongsComments" > 
       {this.elMap(this.state.data)}
+      <form> 
+      <textarea> 
+      </textarea>
+      <input type = "submit" />
+      </form>
       </div>
       );
   }

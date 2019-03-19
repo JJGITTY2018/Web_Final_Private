@@ -9,20 +9,22 @@ class SongList extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+      favoriteStatus: "",
+      currentUserFavs: [],
+      data:[]
     };
 	}
 
 elMapData = (data) => {
   if (data !== null) {
-    return data.map((el) => {
+    return data.map((el,i) => {
       return (
-        <div className="Songs" key={el.id}>
+        <div className="Songs" arr_id = {i} key={el.id}>
         <img src={el.img_url} width="auto" height="100" />
         <h1> {el.title} </h1>
         Post by : <NavLink to = {'profile/' + el.id}>{el.added_by}</NavLink>
         <h3> Total Favs: {el.sumoffavs} </h3>
-        <h4> Type: {el.type} </h4>
-        {this.checkFavsArrOnSong(el.id)}
+        {this.checkFavsArrOnSong(el.id,i)}
         <div className = "Comments">
           <Comments currentUserID= {this.props.props.currentUserID} songs_id = {el.id}/>
         </div>
@@ -36,53 +38,63 @@ elMapData = (data) => {
   }
 }
 
-onClickAdd = (element_id) =>{
+onClickAdd = (element_id,arr_id) =>{
+  // console.log("Added")
   Axios.post("/favorites",{
-    users_id: this.props.currentUserID,
+    users_id: this.props.props.currentUserID,
     songs_id: element_id
+  }).then(()=>{
+    this.getUserFavorites()
+    this.props.AddFavs(arr_id)
   })
 }
-onClickDelete = (element_id) =>{
+onClickDelete = (element_id,arr_id) =>{
+  // console.log(element_id)
+  // console.log(this.props.props.currentUserID)
   Axios.delete("/favorites",{
-    id: element_id
-  })
+    data:{
+    users_id: this.props.props.currentUserID,
+    songs_id: element_id
+    }
+  }).then(()=>{
+    this.props.MinusFavs(arr_id)
+    this.getUserFavorites()
+
+    })
 }
 
-
-getUserFavorites = ()=>{
-    Axios.get('/favorites/users/'+this.state.currentUserID).then((res)=>{
-      console.log(res.data.data)
+  getUserFavorites = () => {
+    Axios.get('/favorites/users/' + this.props.props.currentUserID).then((res) => {
       let currentUserFavsArr = []
-      let currentUserFavsArrIDs = []
-
-      res.data.data.map(el=>{
+      res.data.data.map(el => {
         currentUserFavsArr.push(el.songs_id)
-        currentUserFavsArrIDs.push(el.id)
 
       })
-          this.setState({
-            currentUserFavs: currentUserFavsArr,
-            currentUserFavsID: currentUserFavsArrIDs,
-          })
-    }).then(()=>{
-      // console.log(this.state)
+      this.setState({
+        currentUserFavs: currentUserFavsArr
+      })
+    }).then(() => {
     })
   }
 
-checkFavsArrOnSong = (element_songs_id, element_fav_id) => {
-  if (this.props.props.currentUserFavs.includes(element_songs_id)) {
-    return <button> ⭐ Unfavorite This! 💘 </button>;
+checkFavsArrOnSong = (element_songs_id,array_id) => {
+  if (this.state.currentUserFavs.includes(element_songs_id)) {
+    return <button name = {array_id} onClick={() => {this.onClickDelete(element_songs_id,array_id)}}> ⭐ Unfavorite This! 💘 </button>;
   } else {
-    return <button> ❤ Favorite This! ❤ </button>;
+    return <button onClick = {()=> {this.onClickAdd(element_songs_id,array_id)}}> ❤ Favorite This! ❤ </button>;
   }
 };
 
+
 componentDidMount() {
+    this.getUserFavorites()
 
 }
 
 render(){
-  console.log(this.props.props)
+  
+  // console.log(this.props)
+  // console.log(this.state)
   let songsDisplay = this.elMapData(this.props.props.data)
   return (
     <>
@@ -93,31 +105,3 @@ render(){
 }
 
 export default SongList;
-
-// elMapData = (data) => {
-//   if (data !== null) {
-//     return (
-//       data.map(el => {
-//         return (
-//           <div className="Songs" key={el.id}>
-//             <img src={el.img_url} width="auto" height="100" />
-//             <h1> {el.title} </h1>
-//             Post by : <NavLink to={"profile/" + el.id} >{el.added_by}</NavLink>
-//             <h3> Total Favs: {el.sumoffavs}</h3>
-//             <h4> Type: {el.type}</h4>
-//             <div className="FavButton">
-//               {this.checkFavsArrOnSong(el.id)}
-//               <h1> Comments: </h1>
-//               <div className="comments">
-//                 <CommtsComponent props={el.id} />
-//               </div>
-//             </div>
-//           </div>
-//         )
-//       }))
-//   }
-//   else {
-//     console.log(data)
-//     return null
-//   }
-// }
