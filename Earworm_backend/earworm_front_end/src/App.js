@@ -12,7 +12,7 @@ import Home from "./2.body/home.js"
 import Songs from "./2.body/songs.js";
 import SongsByPopular from "./2.body/songsbypopular.js";
 import SongsByGenres from "./2.body/songsbygenres.js";
-
+import Profile from "./2.body/profile.js";
 
 
 class App extends Component {
@@ -33,6 +33,9 @@ class App extends Component {
 
           <Route exact path="/songs/bygenre" component={SongsByGenres}></Route>
 
+          <Route path="/profile/:id" component={Profile}></Route>
+
+         <Route path="/profile/" component={Profile}></Route>
 
           <Route path="/*" render = {Home}> </Route>
       </Switch>
