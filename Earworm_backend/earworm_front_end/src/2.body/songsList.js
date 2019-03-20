@@ -13,7 +13,11 @@ class SongList extends Component {
       currentUserFavs: [],
       data:[]
     };
-	}
+  }
+  
+naviLink =(id) =>{
+
+}
 
 elMapData = (data) => {
   if (data !== null) {

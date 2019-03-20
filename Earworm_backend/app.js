@@ -10,6 +10,11 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const genresRouter = require ('./routes/genre')
 const songsRouter = require('./routes/songs')
+
+const favsRouters = require('./routes/favorites.js')
+
+const commsRouter = require('./routes/comments.js')
+
 var app = express();
 
 // view engine setup
@@ -26,6 +31,10 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/genres', genresRouter);
 app.use('/songs', songsRouter);
+app.use('/favorites', favsRouters);
+app.use('/comments', commsRouter);
+
+
 
 
 

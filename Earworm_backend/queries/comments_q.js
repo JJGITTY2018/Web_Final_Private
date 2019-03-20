@@ -14,7 +14,7 @@ const getAllCommts = (req, res, next) => {
 }
 
 const getCommtbySongs = (req, res, next) => {
-  db.any('SELECT Favorites.id,favorites.users_id, songs_id, title, img_url,username, genres.type FROM favorites JOIN SONGS ON favorites.songs_id = SONGS.ID JOIN USERS ON favorites.users_id = users.id JOIN GENRES ON Genres_id = genres.id WHERE favorites.songs_ID = $1'
+  db.any('SELECT comments.id, body, comments.users_id, songs_id, username, title  FROM comments JOIN USERS ON users.id = users_id JOIN SONGS ON songs.id = songs_id WHERE songs_ID = $1'
     , [req.params.id]).then((data) => {
       res.status(200).json({
         data
