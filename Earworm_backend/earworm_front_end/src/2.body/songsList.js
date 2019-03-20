@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import Comments from "./comments.js"
 import Axios from 'axios';
 
+// This code works so well - but it's really hard for me to access and work with because of formatting. Could you refactor this project to make it more accessible to other developers?
 
 class SongList extends Component {
 	constructor(props) {
@@ -14,7 +15,7 @@ class SongList extends Component {
       data:[]
     };
   }
-  
+
 naviLink =(id) =>{
 
 }
@@ -33,7 +34,7 @@ elMapData = (data) => {
           <Comments currentUserID= {this.props.props.currentUserID} songs_id = {el.id}/>
         </div>
         </div>
-        
+
       )
     })
   }
@@ -97,7 +98,7 @@ componentDidMount() {
 }
 
 render(){
-  
+
   let songsDisplay = this.elMapData(this.props.props.data)
   return (
     <>

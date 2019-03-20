@@ -3,7 +3,7 @@ import axios from "axios"
 
 import SongList from "./songsList"
 
-export default class SongsByPopular extends 
+export default class SongsByPopular extends
 
 Component {
   constructor(props) {
@@ -25,6 +25,7 @@ Component {
       })
   }
 
+  // Okay, here's a challenge for you - can you get the order to update if you add a favorite to a song that puts it above other songs?
   handleFavsAdd = (arr_id) => {
     this.setState(state => {
       const data = state.data.map((el, state_indx) => {
@@ -77,4 +78,3 @@ Component {
       </>)
   }
 }
-
