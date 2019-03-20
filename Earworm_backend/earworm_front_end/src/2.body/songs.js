@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios"
-import Navi from "../1.header/navi";
-
-// import FavsComponent from "./favorites.js"
 import SongList from "./songsList"
 
 export default class Songs extends Component {

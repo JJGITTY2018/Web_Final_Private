@@ -15,7 +15,8 @@ constructor(props) {
     genresType: [],
     img_url: "",
     title: "",
-    genres_id: " "
+    genres_id: " ",
+    searchQuery: ""
   }
 }
 
@@ -109,7 +110,7 @@ return (
 }
 
 addSongsBox = () =>{
-  if (this.props.match.params.id === this.state.currentUserID || !this.props.match.params.id && this.state.currentShowing === "usongs"){
+  if ((this.state.currentShowing === "usongs" || this.props.match.params.id === this.state.currentUserID) &&!this.props.match.params.id){
     return (
       <>
         <h1> ADD A SONG</h1>

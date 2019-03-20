@@ -24,7 +24,7 @@ elMapData = (data) => {
     return data.map((el,i) => {
       return (
         <div className="Songs" arr_id = {i} key={el.id}>
-        <img src={el.img_url} width="auto" height="100" />
+        <img src={el.img_url} alt= {el.title}width="auto" height="100" />
         <h1> {el.title} </h1>
         Post by : <NavLink to = {'profile/' + el.id}>{el.added_by}</NavLink>
         <h3> Total Favs: {el.sumoffavs} </h3>
@@ -69,10 +69,10 @@ onClickDelete = (element_id,arr_id) =>{
 
   getUserFavorites = () => {
     Axios.get('/favorites/users/' + this.props.props.currentUserID).then((res) => {
+      console.log(res)
       let currentUserFavsArr = []
       res.data.data.map(el => {
-        currentUserFavsArr.push(el.songs_id)
-
+        return currentUserFavsArr.push(el.id)
       })
       this.setState({
         currentUserFavs: currentUserFavsArr
@@ -82,8 +82,9 @@ onClickDelete = (element_id,arr_id) =>{
   }
 
 checkFavsArrOnSong = (element_songs_id,array_id) => {
+  console.log(this.state.currentUserFavs)
   if (this.state.currentUserFavs.includes(element_songs_id)) {
-    return <button name = {array_id} onClick={() => {this.onClickDelete(element_songs_id,array_id)}}> ⭐ Unfavorite This! 💘 </button>;
+    return <button name = {array_id} onClick={() => {this.onClickDelete(element_songs_id,array_id)}}> <span> Unfavorite This! </span></button>;
   } else {
     return <button onClick = {()=> {this.onClickAdd(element_songs_id,array_id)}}> ❤ Favorite This! ❤ </button>;
   }
@@ -97,8 +98,6 @@ componentDidMount() {
 
 render(){
   
-  // console.log(this.props)
-  // console.log(this.state)
   let songsDisplay = this.elMapData(this.props.props.data)
   return (
     <>

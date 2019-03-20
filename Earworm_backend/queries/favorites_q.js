@@ -28,7 +28,7 @@ const getFavSpecSongs = (req,res,next) =>{
 }
 
 const getFavUserSongs = (req, res, next) => {
-  db.any('SELECT favorites.songs_id AS id, title, favorites.users_id, img_url, username AS added_by, type, COUNT AS SUMoffavs FROM FAVORITES JOIN SONGS ON FAVORITES.SONGS_ID = SONGS.ID JOIN USERS ON SONGS.users_id = USERS.ID JOIN GENRES ON GENRES_ID = GENRES.ID JOIN (SELECT COUNT(SONGS_ID), SONGS_ID FROM FAVORITES GROUP BY(SONGS_ID)) a ON a.SONGS_ID = FAVORITES.SONGS_ID WHERE FAVORITES.USERS_ID = 1',[req.params.id]).then((data) => {
+  db.any('SELECT favorites.id AS Favs_ID, favorites.songs_id AS id , title, favorites.users_id, img_url, username AS added_by, type, COUNT AS SUMOFFAVS FROM FAVORITES JOIN SONGS ON FAVORITES.SONGS_ID = SONGS.ID JOIN USERS ON SONGS.users_id = USERS.ID JOIN GENRES ON GENRES_ID = GENRES.ID JOIN (SELECT COUNT(SONGS_ID), SONGS_ID FROM FAVORITES GROUP BY(SONGS_ID)) a ON a.SONGS_ID = FAVORITES.SONGS_ID WHERE FAVORITES.USERS_ID = $1',[req.params.id]).then((data) => {
       res.status(200).json({
         data
       })
