@@ -19,7 +19,7 @@ class Comments extends Component {
         data: res.data.data
       })
     })
-    }, 80)
+    }, 645)
   }
 
   elMap = (arr) =>{
@@ -37,6 +37,7 @@ class Comments extends Component {
     event.preventDefault()
     // console.log(this.state)
     // console.log(this.props)
+    this.state.inputValue.length > 2 ? 
     Axios.post("/comments",{
       body: this.state.inputValue,
       songs_id: this.props.songs_id,
@@ -49,6 +50,10 @@ class Comments extends Component {
         }
       )
     })
+
+    :
+
+    console.log("nope")
   }
 
   onChangeHandler = (event) => {
@@ -67,7 +72,7 @@ class Comments extends Component {
       <div className = "SongsComments" > 
       {this.elMap(this.state.data)}
       <form onSubmit = {this.onSubmitHandler}>  
-          <textarea name= "inputValue" onChange = {this.onChangeHandler} value = {this.state.inputValue}> 
+          <textarea required name= "inputValue" onChange = {this.onChangeHandler} value = {this.state.inputValue}> 
       </textarea>
           <input onSubmit={this.onSubmitHandler} type = "submit" />
       </form>
@@ -77,31 +82,3 @@ class Comments extends Component {
 }
 
 export default Comments;
-
-// elMapData = (data) => {
-//   if (data !== null) {
-//     return (
-//       data.map(el => {
-//         return (
-//           <div className="Songs" key={el.id}>
-//             <img src={el.img_url} width="auto" height="100" />
-//             <h1> {el.title} </h1>
-//             Post by : <NavLink to={"profile/" + el.id} >{el.added_by}</NavLink>
-//             <h3> Total Favs: {el.sumoffavs}</h3>
-//             <h4> Type: {el.type}</h4>
-//             <div className="FavButton">
-//               {this.checkFavsArrOnSong(el.id)}
-//               <h1> Comments: </h1>
-//               <div className="comments">
-//                 <CommtsComponent props={el.id} />
-//               </div>
-//             </div>
-//           </div>
-//         )
-//       }))
-//   }
-//   else {
-//     console.log(data)
-//     return null
-//   }
-// }

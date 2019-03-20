@@ -10,6 +10,10 @@ import './App.css';
 import NavBar from "./1.header/navi.js"
 import Home from "./2.body/home.js"
 import Songs from "./2.body/songs.js";
+import SongsByPopular from "./2.body/songsbypopular.js";
+import SongsByGenres from "./2.body/songsbygenres.js";
+
+
 
 class App extends Component {
   constructor (props) {
@@ -24,6 +28,12 @@ class App extends Component {
       <NavBar exact props={this.props} />
       <Switch >
           <Route exact path="/songs" component={Songs}></Route>
+
+          <Route exact path="/songs/bypop" component={SongsByPopular}></Route>
+
+          <Route exact path="/songs/bygenre" component={SongsByGenres}></Route>
+
+
           <Route path="/*" render = {Home}> </Route>
       </Switch>
       </>
@@ -32,11 +42,3 @@ class App extends Component {
 }
 
 export default withRouter(App)
-
-
-
-
-    //   <Route exact path="/profile/:id" component={Users}></Route>
-    //     <Route exact path="/songs/bypop" component={}></Route>
-    //     <Route exact path="/songs/bygenre" component={}></Route>
-    //     <Route exact path="/profile" component={}> </Route>
