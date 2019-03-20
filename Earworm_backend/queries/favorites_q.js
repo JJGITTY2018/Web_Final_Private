@@ -54,9 +54,7 @@ const createFavorite = (req, res, next) => {
 }
 
 const deleteFavs = (req, res, next) => {
-  console.log(req)
-  console.log(req.body.users_id)
-  console.log(req.body.songs_id)
+
 
   db.none('DELETE FROM FAVORITES WHERE users_ID = $1 AND SONGS_ID = $2', [req.body.users_id, req.body.songs_id]).then(() => {
     res.status(200).json({

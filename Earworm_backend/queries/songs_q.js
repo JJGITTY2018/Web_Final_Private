@@ -3,7 +3,7 @@ const { db } = require("../db/seed.js")
 
 const getAllSongs = (req, res, next) => {
   console.log(req.query.searchQuery)
-  db.any('SELECT SONGS.ID, COUNT(FAVORITES.SONGS_ID) AS SUMOFFAVS, TITLE, LOWER(TITLE), IMG_URL, TYPE, USERNAME AS ADDED_BY FROM SONGS JOIN GENRES ON SONGS.GENRES_ID = GENRES.ID JOIN USERS ON SONGS.users_id = USERS.ID FULL OUTER JOIN favorites ON SONGS.ID = favorites.songs_id WHERE LOWER(TITLE) LIKE $1 GROUP BY  SONGS.ID, TITLE, IMG_URL, TYPE, USERNAME ORDER BY COUNT(SONGS.ID) DESC',["%"+req.query.searchQuery+"%"]).then((data) => {
+  db.any('SELECT users.id as users_id, SONGS.ID, COUNT(FAVORITES.SONGS_ID) AS SUMOFFAVS, TITLE, LOWER(TITLE), IMG_URL, TYPE, USERNAME AS ADDED_BY FROM SONGS JOIN GENRES ON SONGS.GENRES_ID = GENRES.ID JOIN USERS ON SONGS.users_id = USERS.ID FULL OUTER JOIN favorites ON SONGS.ID = favorites.songs_id WHERE LOWER(TITLE) LIKE $1 GROUP BY  users.id, SONGS.ID, TITLE, IMG_URL, TYPE, USERNAME ORDER BY COUNT(SONGS.ID) DESC',["%"+req.query.searchQuery+"%"]).then((data) => {
     res.status(200).json({
       data
     })
@@ -15,7 +15,7 @@ const getAllSongs = (req, res, next) => {
 }
 
 const getAllSongsByGenre = (req, res, next) => {
-  db.any('SELECT SONGS.ID, COUNT(FAVORITES.SONGS_ID) AS SUMOFFAVS, TITLE, LOWER(TITLE), IMG_URL, TYPE, USERNAME AS ADDED_BY FROM SONGS JOIN GENRES ON SONGS.GENRES_ID = GENRES.ID JOIN USERS ON SONGS.users_id = USERS.ID FULL OUTER JOIN favorites ON SONGS.ID = favorites.songs_id WHERE GENRES_ID = $1 GROUP BY  SONGS.ID, TITLE, IMG_URL, TYPE, USERNAME ORDER BY COUNT(SONGS.ID) DESC', [req.params.id]).then((data) => {
+  db.any('SELECT SONGS.ID, COUNT(FAVORITES.SONGS_ID) AS SUMOFFAVS, TITLE,users.id as users_id, LOWER(TITLE), IMG_URL, TYPE, USERNAME AS ADDED_BY FROM SONGS JOIN GENRES ON SONGS.GENRES_ID = GENRES.ID JOIN USERS ON SONGS.users_id = USERS.ID FULL OUTER JOIN favorites ON SONGS.ID = favorites.songs_id WHERE GENRES_ID = $1 GROUP BY  users.id, SONGS.ID, TITLE, IMG_URL, TYPE, USERNAME ORDER BY COUNT(SONGS.ID) DESC', [req.params.id]).then((data) => {
     res.status(200).json({
       data
     })
@@ -28,7 +28,7 @@ const getAllSongsByGenre = (req, res, next) => {
 }
 
 const getAllSongByUser = (req, res, next) => {
-  db.any('SELECT SONGS.ID, COUNT(FAVORITES.SONGS_ID) AS SUMOFFAVS, TITLE, LOWER(TITLE), IMG_URL, TYPE, USERNAME AS ADDED_BY FROM SONGS JOIN GENRES ON SONGS.GENRES_ID = GENRES.ID JOIN USERS ON SONGS.users_id = USERS.ID FULL OUTER JOIN favorites ON SONGS.ID = favorites.songs_id WHERE SONGS.USERS_ID = $1 GROUP BY  SONGS.ID, TITLE, IMG_URL, TYPE, USERNAME ORDER BY COUNT(SONGS.ID) DESC', [req.params.id]).then((data) => {
+  db.any('SELECT users.id as users_id, SONGS.ID, COUNT(FAVORITES.SONGS_ID) AS SUMOFFAVS, TITLE, LOWER(TITLE), IMG_URL, TYPE, USERNAME AS ADDED_BY FROM SONGS JOIN GENRES ON SONGS.GENRES_ID = GENRES.ID JOIN USERS ON SONGS.users_id = USERS.ID FULL OUTER JOIN favorites ON SONGS.ID = favorites.songs_id WHERE SONGS.USERS_ID = $1 GROUP BY  users.id, SONGS.ID, TITLE, IMG_URL, TYPE, USERNAME ORDER BY COUNT(SONGS.ID) DESC', [req.params.id]).then((data) => {
     res.status(200).json({
       data
     })

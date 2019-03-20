@@ -22,12 +22,21 @@ class Comments extends Component {
     }, 645)
   }
 
+  handleClick = (id) => {
+    // console.log(this.props)
+    this.props.functionRefresh(id)
+    
+   
+  }
+
   elMap = (arr) =>{
+    // console.log(this.state)
+    // debugger
     return arr.map(el =>{
       return (
         <div className = "songs_comment" key = {el.id}> 
         <p> {el.body} </p>
-        <p> Comments By: <NavLink to={'profile/' + el.users_id}>{el.username}</NavLink></p>
+        <p> Comments By: <NavLink to={'/profile/'+el.users_id}><button onClick = {()=>{this.handleClick(el.users_id)}}>{el.username}</button></NavLink></p>
         </div>
       )
     })

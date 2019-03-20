@@ -111,6 +111,14 @@ handleFavsMinus = (arr_id) => {
   })
 }
 
+
+functionRefresh =(id)=>{
+  axios("/songs/users/"+id).then((res)=>{
+      this.setState({
+        data:res.data.data
+      })})
+}
+
 componentDidMount() {
   this.getAllSongs()
   this.getGenresList()
@@ -131,7 +139,7 @@ render() {
 
 
       <div className="SongListings">
-        <SongList props={this.state} AddFavs={this.handleFavsAdd} MinusFavs={this.handleFavsMinus} />
+        <SongList props={this.state} AddFavs={this.handleFavsAdd} MinusFavs={this.handleFavsMinus} functionRefresh={this.functionRefresh}/>
       </div>
     </>)
 }

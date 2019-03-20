@@ -16,14 +16,27 @@ constructor(props) {
     img_url: "",
     title: "",
     genres_id: " ",
-    searchQuery: ""
+    searchQuery: "",
+    refresh: "no"
   }
 }
 
-getSongsOfUsers = (event) =>{
-
+getSongsOfUsers = () =>{
+  // console.log(this.state)
+  // if(this.state.refresh === "yes"){
+  //   this.setState({
+  //     refresh:"no"
+  //   })
+  // }
+  // else {
+  //   this.setState({
+  //     refresh:"yes"
+  //   })
+  // }
+  // console.log("hit")
    this.setState({
-    currentShowing: "usongs"
+    currentShowing: "usongs",
+    currentProfile: this.props.match.params.id
   })
   if (this.props.match.params.id){
     let id = this.props.match.params.id
@@ -206,10 +219,19 @@ getGenresList = () =>{
   })
 }
 
+
+functionRefresh =(id)=>{
+  axios("/songs/users/"+id).then((res)=>{
+      this.setState({
+        data:res.data.data
+      })})
+}
+
 componentDidMount() {
   this.getSongsOfUsers()
   this.getGenresList()
 }
+
 
 render() {
   return (
@@ -223,7 +245,7 @@ render() {
     {this.addSongsBox()}
     </div>
 
-    <SongList props={this.state} AddFavs={this.handleFavsAdd} MinusFavs={this.handleFavsMinus} />
+      <SongList props={this.state} AddFavs={this.handleFavsAdd} MinusFavs={this.handleFavsMinus} functionRefresh={this.functionRefresh} />
     </>)
 }
 }

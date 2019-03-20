@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "axios"
 import SongList from "./songsList"
 
+import {withRouter} from "react-router-dom"
+
 export default class Songs extends Component {
   constructor (props) {
     super(props)
@@ -108,9 +110,19 @@ export default class Songs extends Component {
     // console.log(this.state)
   }
 
+  functionRefresh = (id) => {
+    axios("/songs/users/" + id).then((res) => {
+      this.setState({
+        data: res.data.data
+      })
+    })
+  }
+  
   componentDidMount() {
     this.getAllSongs()
   }
+
+  
 
   render() {
     return (
@@ -123,7 +135,7 @@ export default class Songs extends Component {
       </form>
       </div>
       <div className = "SongListings">
-          <SongList props={this.state} AddFavs={this.handleFavsAdd} MinusFavs={this.handleFavsMinus}/> 
+          <SongList props={this.state} AddFavs={this.handleFavsAdd} MinusFavs={this.handleFavsMinus} functionRefresh={this.functionRefresh}/>
       </div>
     </>)
   }

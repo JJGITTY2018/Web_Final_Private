@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect} from 'react-router-dom';
+import { withRouter } from "react-router-dom"
 
 import Comments from "./comments.js"
 import Axios from 'axios';
@@ -15,22 +16,38 @@ class SongList extends Component {
     };
   }
   
-naviLink =(id) =>{
+historyPushHandler =(id,event) =>{
+  console.log(id)
+  // debugger
+  // this.props.history.go(1)
+  // console.log(this.props)
+  this.props.history.push("/profile/"+id)
+  this.props.functionRefresh(id)
+  // this.props.history.push("/profile/" + id)
 
+
+    
+
+  // debugger
+  // event.preventDefault()
+
+  // '/profile/'+ el.id}
 }
 
 elMapData = (data) => {
   if (data !== null) {
     return data.map((el,i) => {
+      // console.log(el)
       return (
         <div className="Songs" arr_id = {i} key={el.id}>
         <img src={el.img_url} alt= {el.title}width="auto" height="100" />
         <h1> {el.title} </h1>
-        Post by : <NavLink to = {'profile/' + el.id}>{el.added_by}</NavLink>
+        Post by : 
+        <button onClick = {()=> {this.historyPushHandler(el.users_id)}}><NavLink to = {`/profile/${el.users_id}`} >{el.added_by}</NavLink> </button>
         <h3> Total Favs: {el.sumoffavs} </h3>
         {this.checkFavsArrOnSong(el.id,i)}
         <div className = "Comments">
-          <Comments currentUserID= {this.props.props.currentUserID} songs_id = {el.id}/>
+            <Comments currentUserID={this.props.props.currentUserID} songs_id={el.id} functionRefresh={this.props.functionRefresh}/>
         </div>
         </div>
         
@@ -69,7 +86,7 @@ onClickDelete = (element_id,arr_id) =>{
 
   getUserFavorites = () => {
     Axios.get('/favorites/users/' + this.props.props.currentUserID).then((res) => {
-      console.log(res)
+      // console.log(res)
       let currentUserFavsArr = []
       res.data.data.map(el => {
         return currentUserFavsArr.push(el.id)
@@ -82,7 +99,7 @@ onClickDelete = (element_id,arr_id) =>{
   }
 
 checkFavsArrOnSong = (element_songs_id,array_id) => {
-  console.log(this.state.currentUserFavs)
+  // console.log(this.state.currentUserFavs)
   if (this.state.currentUserFavs.includes(element_songs_id)) {
     return <button name = {array_id} onClick={() => {this.onClickDelete(element_songs_id,array_id)}}> <span> Unfavorite This! </span></button>;
   } else {
@@ -107,4 +124,4 @@ render(){
 }
 }
 
-export default SongList;
+export default withRouter(SongList);
