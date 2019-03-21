@@ -1,0 +1,22 @@
+.Home {
+  height: 100vh;
+  background-color: #6213894f;
+  padding-top: 15px;
+}
+
+.content_container {
+  background: white;
+  min-width: 800px;
+  margin-left: 10%;
+  margin-right: 10%;
+  height: 80vh;
+  box-shadow: 5px 5px 10px 2px #0a0a0a38;
+}
+
+.Home h1 {
+  font-size: 45px;
+  text-align: center;
+  font-family: 'Capriola', sans-serif;
+  /* font-family: 'Harmattan', sans-serif; */
+  /* font-family: 'NTR', sans-serif; */
+}

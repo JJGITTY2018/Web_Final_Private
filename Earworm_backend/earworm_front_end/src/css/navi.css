@@ -1,4 +1,41 @@
-.NaviBar{
+.NaviBar {
+  position: sticky;
+  background-color: #621389;
+  color: #d1d1d1;
   display: grid;
-  
+  height: 75px;
+  width: 100%;
+  grid-template-columns: .5fr .4fr 1fr;
+  /* font-family: 'Capriola', sans-serif; */
+  /* font-family: 'Harmattan', sans-serif; */
+  font-family: 'NTR', sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+  box-shadow: 5px 5px 10px 2px #0a0a0a38;
+}
+
+.NaviBar h1 {
+  font-size: 100%;
+  align-self: center;
+  padding-left: 5%;
+}
+
+.naviMenu {
+  grid-column-start: 3;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.naviMenu a {
+  color: #d1d1d1;
+  text-decoration: none;
+  padding: 10px;
+  margin: 10px;
+}
+
+.naviMenu a:hover {
+  background-color: #d1d1d1;
+  color: #621389;
+  box-shadow: .1px 7px 50px -1px rgba(0, 0, 0, .2);
 }
