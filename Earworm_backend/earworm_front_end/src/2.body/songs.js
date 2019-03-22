@@ -69,6 +69,8 @@ export default class Songs extends Component {
         data: data
       }
     })
+    this.getAllSongs()
+
   }
 
   handleFavsMinus = (arr_id) => {
@@ -89,6 +91,8 @@ export default class Songs extends Component {
         data: data
       }
     })
+    this.getAllSongs()
+
   }
 
   functionRefresh = (id) => {
@@ -102,7 +106,6 @@ export default class Songs extends Component {
   componentDidMount() {
     this.getAllSongs()
   }
-
 
 
   render() {

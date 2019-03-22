@@ -20,7 +20,33 @@ export default class SongsByPopular extends Component {
           data: res.data.data
         })
       }).then(() => {
+        
       })
+  }
+
+  compareValues = (key, order='asc') => {
+    return function (a,b){
+      if(!a.hasOwnProperty(key) || !b.hasOwnProperty(key)){
+        return 0
+      }
+
+      const varA = (typeof a[key] === 'string') ? a[key].toUpperCase() : a[key]
+
+      const varB = (typeof a[key] === 'string') ? b[key].toUpperCase() : b[key]
+
+      let compare = 0
+
+      if(varA > varB){
+        compare = 1
+      }
+      else if (varA < varB){
+        compare = 1
+      }
+
+      return (
+        (order === 'desc') ? (compare * -1) : compare
+      )
+    }
   }
 
   handleFavsAdd = (arr_id) => {
@@ -36,9 +62,14 @@ export default class SongsByPopular extends Component {
         }
       })
       return {
-        data: data
+        data: data.sort(this.compareValues('sumsoffavs','desc'))
       }
     })
+
+    this.getAllSongs()
+
+    console.log(this.state)
+  
   }
 
   handleFavsMinus = (arr_id) => {
@@ -57,6 +88,8 @@ export default class SongsByPopular extends Component {
         data: data
       }
     })
+    this.getAllSongs()
+
   }
 
   functionRefresh =(id)=>{
@@ -65,6 +98,8 @@ export default class SongsByPopular extends Component {
         data:res.data.data
       })})
 }
+
+
 
   componentDidMount() {
     this.getAllSongs()

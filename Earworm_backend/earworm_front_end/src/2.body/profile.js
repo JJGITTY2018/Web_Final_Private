@@ -176,6 +176,7 @@ export default class Profile extends Component {
         data: data
       }
     })
+
   }
 
 
@@ -195,6 +196,7 @@ export default class Profile extends Component {
         data: data
       }
     })
+
   }
 
   getGenresList = () => {

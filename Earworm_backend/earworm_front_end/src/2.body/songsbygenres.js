@@ -91,6 +91,8 @@ handleFavsAdd = (arr_id) => {
       data: data
     }
   })
+  this.getAllSongs()
+
 }
 
 handleFavsMinus = (arr_id) => {
@@ -109,6 +111,8 @@ handleFavsMinus = (arr_id) => {
       data: data
     }
   })
+  this.getAllSongs()
+
 }
 
 

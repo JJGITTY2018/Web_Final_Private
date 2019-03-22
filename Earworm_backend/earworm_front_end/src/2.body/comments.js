@@ -37,9 +37,8 @@ class Comments extends Component {
         <div className="songs_comments" key={el.id}>
         
         <p>
-        
-          <NavLink to={'/profile/' + el.users_id}><button onClick={() => { this.handleClick(el.users_id) }}>{el.username}</button></NavLink>::: 
-          <p> {el.body} </p>
+          <NavLink to={'/profile/' + el.users_id}><button onClick={() => { this.handleClick(el.users_id) }}>{el.username}</button></NavLink>:::
+          <> {el.body} </>
         </p>
 
         </div>
