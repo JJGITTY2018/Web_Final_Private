@@ -3,9 +3,7 @@ import axios from "axios"
 
 import SongList from "./songsList"
 
-export default class SongsByPopular extends 
-
-Component {
+export default class SongsByPopular extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -74,8 +72,9 @@ Component {
 
   render() {
     return (
-      <>
-        <div className="Songs">
+      <div className= "content">
+        <div className = "content_container">
+        <div className="page_title">
           <h1> Songs By Favs </h1>
         </div>
         <div className="SongListings">
@@ -83,7 +82,8 @@ Component {
             functionRefresh={this.functionRefresh}
           />
         </div>
-      </>)
+        </div>
+      </div>)
   }
 }
 

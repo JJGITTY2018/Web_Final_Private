@@ -3,9 +3,9 @@ import axios from "axios"
 
 import SongList from "./songsList"
 
-export default class Profile extends
+import "../css/allsongs.css"
 
-Component {
+export default class Profile extends Component {
 constructor(props) {
   super(props)
   this.state = {
@@ -125,17 +125,17 @@ return (
 addSongsBox = () =>{
   if ((this.state.currentShowing === "usongs" || this.props.match.params.id === this.state.currentUserID) &&!this.props.match.params.id){
     return (
-      <>
+      <div className = "add_song_box" >
         <h1> ADD A SONG</h1>
         <form  onSubmit = {this.handleOnSubmit}>
           <label> TITLE: </label>
           <input onChange={this.handleOnChange} value ={this.state.title} name = "title" required type="input" placeholder="TITLE" />
           <label> IMG_URL: </label>
-          <input onChange={this.handleOnChange} value = {this.state.img_url} name = "img_url" required type="input" placeholder="TITLE" />
+          <input onChange={this.handleOnChange} value = {this.state.img_url} name = "img_url" required type="input" placeholder="IMG URL" />
           {this.elMapGenresOptions(this.state.genresType)}
           <input type="submit" />
         </form>
-      </>
+      </div>
     )
   }
   else{
@@ -235,18 +235,29 @@ componentDidMount() {
 
 render() {
   return (
-    <>
-    <form >
-        <input name="option" value ="usongs" type="radio" defaultChecked onClick = {this.getSongsOfUsers}/> <label >USERS SONGS</label>
-        <input name="option" value = "favs" type="radio" onClick = {this.getUsersFavsSongs}/> <label> USERS FAVS</label>
-    </form>
+    <div className = "content" >
+    <div className = "content_container">
+    <div className = "page_title" >
+    <div className = "UsersProfile">
+        <button className = "users_songs" name="option" value ="usongs" type="button" defaultChecked onClick = {this.getSongsOfUsers}> <label> USERS SONGS</label> </button>
 
+
+
+        <button className = "favs_songs" name="option" value = "favs" type="button" onClick = {this.getUsersFavsSongs}> <label> USERS FAVS</label> </button>
+
+    </div>
     <div>
     {this.addSongsBox()}
     </div>
-
+    </div>
+    <div className = "SongListings">
       <SongList props={this.state} AddFavs={this.handleFavsAdd} MinusFavs={this.handleFavsMinus} functionRefresh={this.functionRefresh} />
-    </>)
+    </div>
+    
+    </div>
+    </div>
+    
+    )
 }
 }
 

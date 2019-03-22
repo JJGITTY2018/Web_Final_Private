@@ -1,0 +1,103 @@
+.SongsComments {
+  /* background: #00f2816b; */
+  margin-left: 10px;
+  font-size: 20px;
+  grid-column-start: 2;
+  /* background-color: red; */
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-row-gap: 5px;
+  position: relative;
+  top: -41px;
+  height: 250px;
+  overflow: scroll;
+}
+
+.songs_comments {
+  /* text-align: right;
+  margin: 10px;
+  padding-right: 100px;
+  font-size: 20px;
+  font-family: 'Capriola', sans-serif;
+  font-family: 'Harmattan', sans-serif; */
+}
+
+.songs_comments:nth-child(even) {
+  text-align: left;
+  margin: 10px;
+  width: 55%;
+  margin-left: 100px;
+  padding: 10px;
+  padding-left: 15px;
+  font-size: 15px;
+  font-family: 'Capriola', sans-serif;
+  background-color: #621389;
+  color: #d1d1d1;
+  border-radius: 25px;
+  padding-bottom: 10px;
+  /* font-family: 'Harmattan', sans-serif; */
+}
+
+.songs_comments:nth-child(even) button {
+  color: #d1d1d1;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  background-color: #00f28100;
+  text-decoration: underline;
+  font-size: 15px;
+  font-family: 'Capriola', sans-serif;
+  /* font-family: 'Harmattan', sans-serif; */
+}
+
+.songs_comments:nth-child(odd) {
+  justify-self: end;
+  background-color: #00f281;
+  border-radius: 25px;
+  text-align: right;
+  margin: 10px;
+  padding: 10px;
+  padding-right: 15px;
+  font-size: 15px;
+  width: 55%;
+  /* height: 100px; */
+  /* overflow: scroll; */
+  padding-bottom: 10px;
+  text-overflow: ellipsis;
+  font-family: 'Capriola', sans-serif;
+  /* font-family: 'Harmattan', sans-serif; */
+}
+
+.songs_comments:nth-child(odd) button {
+  border: none;
+  background-color: #00f28100;
+  text-decoration: underline;
+  font-size: 15px;
+  font-family: 'Capriola', sans-serif;
+  /* font-family: 'Harmattan', sans-serif; */
+}
+
+.comment_box {
+  grid-column-start: 2;
+  display: flex;
+}
+
+.comment_box textarea {
+  resize: none;
+  width: 88%;
+  height: 55%;
+  font-family: 'Capriola', sans-serif;
+  font-size: 25px;
+  margin: 5px;
+  padding: 10px;
+}
+
+.comment_box input[type ="submit"] {
+  width: 20%;
+  border: none;
+  min-height: 100%;
+  font-family: 'Capriola', sans-serif;
+  font-size: 12px; 
+  margin: 5px;
+  padding: 10px;
+}

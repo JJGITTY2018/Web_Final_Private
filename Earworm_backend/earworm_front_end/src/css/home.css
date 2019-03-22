@@ -5,18 +5,26 @@
 }
 
 .content_container {
-  background: white;
+  margin-top:10px;
+  background-color: #eeeeee;
+  border-radius: 2px;
   min-width: 800px;
   margin-left: 10%;
   margin-right: 10%;
-  height: 80vh;
+  min-height: 65vh;
   box-shadow: 5px 5px 10px 2px #0a0a0a38;
+  display: flex;
+  flex-direction: column;
+
 }
 
-.Home h1 {
+.content_container h1 {
+  /* background-color: red; */
+  /* padding: 70px 0; */
   font-size: 45px;
   text-align: center;
   font-family: 'Capriola', sans-serif;
+  margin: auto;
   /* font-family: 'Harmattan', sans-serif; */
   /* font-family: 'NTR', sans-serif; */
 }

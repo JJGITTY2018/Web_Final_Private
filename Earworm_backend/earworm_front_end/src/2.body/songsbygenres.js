@@ -3,9 +3,9 @@ import axios from "axios"
 
 import SongList from "./songsList"
 
-export default class SongsByPopular extends
+import "../css/allsongs.css"
 
-Component {
+export default class SongsByPopular extends Component {
 constructor(props) {
   super(props)
   this.state = {
@@ -126,22 +126,22 @@ componentDidMount() {
 
 render() {
   return (
-    <>
-      <div className="Songs">
+    <div className = "content" >
+      <div className="content_container">
+      <div className="page_title">
         <h1> Songs By Genres </h1>
-      </div>
-
-      <div className = "GenreSelector"> 
-        <h2> Select: 
+        <form>
         {this.elMapGenresOptions(this.state.genresType)}
-        </h2>
+        </form>
       </div>
 
 
       <div className="SongListings">
         <SongList props={this.state} AddFavs={this.handleFavsAdd} MinusFavs={this.handleFavsMinus} functionRefresh={this.functionRefresh}/>
       </div>
-    </>)
+      </div>
+    </div>
+    )
 }
 }
 

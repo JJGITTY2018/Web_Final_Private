@@ -32,11 +32,16 @@ class Comments extends Component {
   elMap = (arr) =>{
     // console.log(this.state)
     // debugger
-    return arr.map(el =>{
+    return arr.map(el => {
       return (
-        <div className = "songs_comment" key = {el.id}> 
-        <p> {el.body} </p>
-        <p> Comments By: <NavLink to={'/profile/'+el.users_id}><button onClick = {()=>{this.handleClick(el.users_id)}}>{el.username}</button></NavLink></p>
+        <div className="songs_comments" key={el.id}>
+        
+        <p>
+        
+          <NavLink to={'/profile/' + el.users_id}><button onClick={() => { this.handleClick(el.users_id) }}>{el.username}</button></NavLink>::: 
+          <p> {el.body} </p>
+        </p>
+
         </div>
       )
     })
@@ -78,14 +83,19 @@ class Comments extends Component {
   
   render() {
     return (
+      <>
       <div className = "SongsComments" > 
       {this.elMap(this.state.data)}
-      <form onSubmit = {this.onSubmitHandler}>  
-          <textarea required name= "inputValue" onChange = {this.onChangeHandler} value = {this.state.inputValue}> 
-      </textarea>
-          <input onSubmit={this.onSubmitHandler} type = "submit" />
-      </form>
       </div>
+
+      <form className = "comment_box" onSubmit={this.onSubmitHandler}>
+       
+        <textarea required name="inputValue" onChange={this.onChangeHandler} value={this.state.inputValue}>
+        </textarea>
+         <input onSubmit={this.onSubmitHandler} type="submit" />
+        
+      </form>
+      </>
       );
   }
 }

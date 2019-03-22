@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import axios from "axios"
 import SongList from "./songsList"
 
-import {withRouter} from "react-router-dom"
+import "../css/allsongs.css"
+import "../css/songsListings.css"
+
 
 export default class Songs extends Component {
   constructor (props) {
@@ -126,18 +128,31 @@ export default class Songs extends Component {
 
   render() {
     return (
-    <>
-      <div className="Songs">
+    <div className = "content" >
+    <div className = "content_container">
+      <div className="page_title">
       <h1> All Songs </h1>
+      
+      
       <form onSubmit = {this.handleOnSubmit}>
-        <input name = "searchQuery" value = {this.state.searchQuery} type = "input" onChange = {this.handleOnChange}></input>
-        <input type = "submit" ></input>
+       
+        <input name = "searchQuery" value = {this.state.searchQuery} type = "input" onChange = {this.handleOnChange}
+        placeholder ="search songs..."></input>
+        
+        <button onClick = {this.handleOnSubmit}> 
+        <img alt = "" src="https://img.icons8.com/material/50/000000/search.png"/>
+        </button>
+
       </form>
       </div>
+
+
       <div className = "SongListings">
           <SongList props={this.state} AddFavs={this.handleFavsAdd} MinusFavs={this.handleFavsMinus} functionRefresh={this.functionRefresh}/>
+        </div>
       </div>
-    </>)
+      </div>
+      )
   }
 }
 
