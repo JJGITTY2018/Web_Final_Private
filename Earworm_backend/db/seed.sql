@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS earworms;
-CREATE DATABASE earworms;
+DROP DATABASE IF EXISTS earworm;
+CREATE DATABASE earworm;
 
-\c earworms 
+\c earworm
 
 
 CREATE TABLE users (
