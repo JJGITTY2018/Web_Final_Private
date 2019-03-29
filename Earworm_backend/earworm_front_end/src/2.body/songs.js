@@ -5,6 +5,7 @@ import SongList from "./songsList"
 import "../css/allsongs.css"
 import "../css/songsListings.css"
 
+// The styling of your comments has an interesting bug - if I post multiple comments in a row, some of them are justified left and some are justified right, implying that they're coming from different users. How can we adjust the CSS here so that only the comments written by the logged-in user are justified right?
 
 export default class Songs extends Component {
   constructor(props) {
@@ -137,4 +138,3 @@ export default class Songs extends Component {
     )
   }
 }
-
